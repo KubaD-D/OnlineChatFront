@@ -1,0 +1,13 @@
+
+.message-row {
+    clear: both;
+}
+
+.message-content {
+    background-color: dodgerblue;
+    color: white;
+}
+
+.current-user {
+    float: right;
+}
