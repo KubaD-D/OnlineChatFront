@@ -20,21 +20,24 @@ const ChatRoom = ({username}) => {
     }, [chatRoomId])
 
     const fetchMessages = async () => {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwibmJmIjoxNzA3NTkwNDM1LCJleHAiOjE3MDc1OTQwMzUsImlhdCI6MTcwNzU5MDQzNSwiaXNzIjoib25saW5lLWNoYXQtYmFjayIsImF1ZCI6Im9ubGluZS1jaGF0LWZyb250In0.XHe1NMk8JtUTLozSLZndz6mqD8E0-S3UtRmb8XsEgPw";
+        //const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwibmJmIjoxNzA3NTkwNDM1LCJleHAiOjE3MDc1OTQwMzUsImlhdCI6MTcwNzU5MDQzNSwiaXNzIjoib25saW5lLWNoYXQtYmFjayIsImF1ZCI6Im9ubGluZS1jaGF0LWZyb250In0.XHe1NMk8JtUTLozSLZndz6mqD8E0-S3UtRmb8XsEgPw";
 
         try {
 
+            /*
             if(!token) {
                 throw new Error("No JWT token fount (fetchMessages)");
             }
+            */
 
             const headers = {
-                "Authorization": `Bearer ${token}`,
+                //"Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json"
             }
 
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/messages`, {
-                headers: headers
+                headers: headers,
+                credentials: "include"
             });
 
             if(!response.ok) {
