@@ -11,7 +11,7 @@ const MessageBox = ({ messages }) => {
                 {messages.map((message, index) => (
                     
                     <div key={index} className="message-row w-100">
-                        <div className={`message w-25${username == message.sender ? " current-user" : ""}`}>
+                        <div className={`message w-25${username === message.sender ? " current-user" : ""}`}>
                             <div className="message-sender">
                                 {message.sender}
                             </div>
