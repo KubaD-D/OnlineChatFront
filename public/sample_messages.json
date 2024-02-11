@@ -1,0 +1,62 @@
+[
+    {
+      "sender": "admin",
+      "timeSent": "2024.02.11 18:42",
+      "content": "This is a nice message"
+    },
+    {
+      "sender": "Sender 2",
+      "timeSent": "2024.02.11 18:42",
+      "content": "dgsgsadgdds"
+    },
+    {
+      "sender": "admin",
+      "timeSent": "2024.02.11 18:42",
+      "content": "Great"
+    },
+    {
+      "sender": "admin",
+      "timeSent": "2024.02.11 18:42",
+      "content": "Yeah this is super great isn't it"
+    },
+    {
+        "sender": "admin",
+        "timeSent": "2024.02.11 18:42",
+        "content": "This is a nice message"
+      },
+      {
+        "sender": "Sender 2",
+        "timeSent": "2024.02.11 18:42",
+        "content": "dgsgsadgdds"
+      },
+      {
+        "sender": "admin",
+        "timeSent": "2024.02.11 18:42",
+        "content": "Great"
+      },
+      {
+        "sender": "admin",
+        "timeSent": "2024.02.11 18:42",
+        "content": "Yeah this is super great isn't it"
+      },
+      {
+        "sender": "admin",
+        "timeSent": "2024.02.11 18:42",
+        "content": "This is a nice message"
+      },
+      {
+        "sender": "Sender 2",
+        "timeSent": "2024.02.11 18:42",
+        "content": "dgsgsadgdds"
+      },
+      {
+        "sender": "admin",
+        "timeSent": "2024.02.11 18:42",
+        "content": "Great"
+      },
+      {
+        "sender": "admin",
+        "timeSent": "2024.02.11 18:42",
+        "content": "Yeah this is super great isn't it"
+      }
+  ]

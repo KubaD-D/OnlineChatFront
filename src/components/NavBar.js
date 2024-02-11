@@ -16,7 +16,7 @@ const NavBar = () => {
             </Nav>
   
             <Nav className="ml-auto">
-              <Nav.Link as={Link} to="/">Log in</Nav.Link>
+              <Nav.Link as={Link} to="/Login">Log in</Nav.Link>
             </Nav>
   
           </Navbar.Collapse>
