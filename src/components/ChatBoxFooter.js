@@ -1,0 +1,20 @@
+import { Form } from "react-bootstrap";
+
+const ChatBoxFooter = () => {
+
+    return (
+        <div className="chat-box-footer">
+
+            <div className="message-to-send-container">
+                <input type="text" id="message-to-send" name="message-to-send" />
+            </div>
+
+            <div class="send-message-button-container">
+                <button type="button" id="send-message-button">Send</button>
+            </div>
+
+        </div>
+    );
+}
+
+export default ChatBoxFooter;
