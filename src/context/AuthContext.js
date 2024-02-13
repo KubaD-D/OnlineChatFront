@@ -25,6 +25,8 @@ export const AuthProvider = ({ children }) => {
 
             setToken(jwtToken);
             setUsername(usernameDecoded);
+
+            console.log(`Auth context username ${username}`);
         } catch(err) {
             console.error(err);
         }

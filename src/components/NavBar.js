@@ -1,8 +1,15 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useAuth } from "../context/AuthContext";
+import { useEffect } from "react";
 
 const NavBar = () => {
+    const { username } = useAuth();
+
+    useEffect(() => {
+      console.log(username);
+    }, [])
 
     return (
         <Navbar expand="lg" bg="dark" variant="dark">
@@ -16,7 +23,15 @@ const NavBar = () => {
             </Nav>
   
             <Nav className="ml-auto">
-              <Nav.Link as={Link} to="/Login">Log in</Nav.Link>
+              {username
+              ?
+              <>
+                <Nav.Link as={Link} to="/Profile">{`${username} |`}</Nav.Link>
+                <Nav.Link as={Link} to="/Logout">Log out</Nav.Link>
+              </>
+              :
+              <Nav.Link as={Link} to="/Login">Log in</Nav.Link>}
+              
             </Nav>
   
           </Navbar.Collapse>

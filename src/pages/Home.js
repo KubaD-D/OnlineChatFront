@@ -1,13 +1,15 @@
 import NavBar from "../components/NavBar";
 import { Container, Table } from "react-bootstrap";
+import { useAuth } from "../context/AuthContext";
 
 const Home = () => {
+
+    const { username } = useAuth();
 
     return (
 
         <>
             <NavBar />
-            
             <Container className="d-flex flex-wrap justify-content-center">
                 <div className="text-center w-100 mb-5">
                     <button type="button" className="btn btn-primary mt-2">Create new chat room</button>
