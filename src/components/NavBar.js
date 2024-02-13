@@ -7,10 +7,6 @@ import { useEffect } from "react";
 const NavBar = () => {
     const { username } = useAuth();
 
-    useEffect(() => {
-      console.log(username);
-    }, [])
-
     return (
         <Navbar expand="lg" bg="dark" variant="dark">
         <Container>

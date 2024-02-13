@@ -16,12 +16,48 @@ export const loginRequest = async (username, password) => {
         }
 
         const data = await response.json();
-        const jwtToken = data.jwtToken;
+        const responseUsername = data.username;
 
-        return jwtToken
+        return responseUsername
 
     } catch(err) {
         console.error(err);
+    }
+
+}
+
+export const refreshRequest = async () => {
+
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/User/refresh`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include"
+    });
+
+    if(!response.ok) {
+        return null
+    }
+
+    const data = await response.json();
+    const username = data.username;
+
+    return username;
+}
+
+export const logoutRequest = async () => {
+
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/User/revoke`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include"
+    });
+
+    if(!response.ok) {
+        console.error("Error logging out (revoking)");
     }
 
 }

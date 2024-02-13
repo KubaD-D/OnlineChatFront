@@ -1,6 +1,6 @@
 import { createContext, useState, useContext } from "react";
 import { jwtDecode } from "jwt-decode";
-import { loginRequest } from "../utils/AuthSerivce";
+import { loginRequest, logoutRequest } from "../utils/AuthSerivce";
 
 const AuthContext = createContext();
 
@@ -9,22 +9,14 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
-    const [token, setToken] = useState(null);
     const [username, setUsername] = useState(null);
 
-    const login = async (username_, password) => {
+    const login = async (loginUsername, password) => {
 
         try {
-            const jwtToken = await loginRequest(username_, password)
-        
-            const tokenDecoded = jwtDecode(jwtToken);
-            const usernameDecoded = tokenDecoded.unique_name;
-
-            console.log(jwtToken);
-            console.log(usernameDecoded);
-
-            setToken(jwtToken);
-            setUsername(usernameDecoded);
+            const responseUsername = await loginRequest(loginUsername, password)
+    
+            setUsername(responseUsername);
 
             console.log(`Auth context username ${username}`);
         } catch(err) {
@@ -32,13 +24,14 @@ export const AuthProvider = ({ children }) => {
         }
     }
     
-    const logout = () => {
-        setToken(null);
+    const logout = async () => {
+        await logoutRequest();
+
         setUsername(null);
     }
 
     return (
-        <AuthContext.Provider value={{ token, username, login, logout }}>
+        <AuthContext.Provider value={{ username, login, logout, setUsername }}>
             {children}
         </AuthContext.Provider>
     );

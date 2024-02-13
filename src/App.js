@@ -4,20 +4,39 @@ import ChatRoom from './pages/ChatRoom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { useEffect } from 'react';
+import { refreshRequest } from './utils/AuthSerivce';
 
 function App() {
+  const { username, setUsername } = useAuth();
+
+  useEffect(() => {
+
+    const refresh = async () => {
+      const newUsername = await refreshRequest();
+
+      if(newUsername == null) {
+        console.log("Error refreshing token!");
+        return;
+      }
+
+      setUsername(newUsername);
+    } 
+
+    refresh();
+
+  }, [])
+
   return (
     <>
       <BrowserRouter>
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/ChatRoom" element={<ChatRoom username="admin" />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="/Logout" element={<Logout />} />
-          </Routes>
-        </AuthProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/ChatRoom" element={<ChatRoom username="admin" />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Logout" element={<Logout />} />
+        </Routes>
       </BrowserRouter>
 
     </>
