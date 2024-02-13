@@ -11,15 +11,10 @@ const ChatRoom = () => {
     const [chatRoomId, setChatRoomId] = useState(null);
     const chatRoomIdRef = useRef("");
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setChatRoomId(chatRoomIdRef.current.value);
-    }
-
     return (
             <div className="chat-room-container">
 
-            <ChatRoomsList />
+            <ChatRoomsList setChatRoomId={setChatRoomId} />
             <ChatBox chatRoomId={chatRoomId} />
 
             </div>

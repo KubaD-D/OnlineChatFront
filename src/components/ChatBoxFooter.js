@@ -9,7 +9,7 @@ const ChatBoxFooter = () => {
                 <input type="text" id="message-to-send" name="message-to-send" />
             </div>
 
-            <div class="send-message-button-container">
+            <div className="send-message-button-container">
                 <button type="button" id="send-message-button">Send</button>
             </div>
 
