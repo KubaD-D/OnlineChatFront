@@ -11,7 +11,7 @@ const ChatRoomsList = ({ setChatRoomId }) => {
     }
 
     return (
-        <div className="chat-rooms-list col-md-2 bg-light">
+        <div className="chat-rooms-list col-md-2 bg-light d-flex flex-column">
             {data.map((chatRoom, index) => {
                 return (
                 <ChatRoomItem key={index} chatRoomId={chatRoom.id} setChatRoomId={setChatRoomId} chatRoomTitle={chatRoom.title} />
