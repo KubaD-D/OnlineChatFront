@@ -4,16 +4,20 @@ import ChatRoom from './pages/ChatRoom';
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import { AuthProvider } from './context/AuthContext';
+
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/ChatRoom" element={<ChatRoom username="admin" />} />
-          <Route path="/Login" element={<Login />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/ChatRoom" element={<ChatRoom username="admin" />} />
+            <Route path="/Login" element={<Login />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
 
     </>

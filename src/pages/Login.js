@@ -1,9 +1,12 @@
 import { Button, Container, Form } from "react-bootstrap";
 import NavBar from "../components/NavBar";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 
 const Login = () => {
+
+    const { login } = useAuth();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -12,21 +15,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/User/login`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ username, password }),
-                credentials: "include"
-            });
-
-            if(!response.ok) {
-                throw new Error("Login failed");
-            }
-
-            console.log(response);
-
+            await login(username, password);
         } catch(err) {
             console.error(err);
         }
