@@ -15,7 +15,6 @@ const Logout = () => {
 
     return (
         <>
-            <NavBar />
             {username
             ?
             <h1>There was an error in logout attempt</h1>

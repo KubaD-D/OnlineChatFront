@@ -27,8 +27,6 @@ const Login = () => {
 
     return (
         <>
-            <NavBar />
-
             <Container className="d-flex justify-content-center">
 
                 <Form className="w-25 border p-3 mt-5" onSubmit={e => handleSubmit(e)}>

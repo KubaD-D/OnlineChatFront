@@ -14,10 +14,8 @@ const ChatRoom = () => {
 
     return (
         <>
-            <NavBar />
-
-            <div className="container-fluid vh-100">
-                <div className="row vh-100">
+            <div className="container-fluid h-100">
+                <div className="row h-100">
 
                     <ChatRoomsList setChatRoomId={setChatRoomId} />
                     <ChatBox chatRoomId={chatRoomId} />

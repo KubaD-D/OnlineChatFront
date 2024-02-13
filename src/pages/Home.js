@@ -9,7 +9,6 @@ const Home = () => {
     return (
 
         <>
-            <NavBar />
             <Container className="d-flex flex-wrap justify-content-center">
                 <div className="text-center w-100 mb-5">
                     <button type="button" className="btn btn-primary mt-2">Create new chat room</button>
