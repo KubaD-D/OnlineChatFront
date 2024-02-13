@@ -7,7 +7,7 @@ const MessageContainer = ({ chatRoomId }) => {
     const { data } = useFetch(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/messages`, !chatRoomId);
 
     return (
-        <div className="message-container">
+        <div className="message-container overflow-auto d-flex flex-column justify-content-end h-75">
             {!data
             ?
             <h1>Loading...</h1>

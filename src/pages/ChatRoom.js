@@ -16,13 +16,15 @@ const ChatRoom = () => {
         <>
             <NavBar />
 
-            <div className="chat-room-container">
+            <div className="container-fluid vh-100">
+                <div className="row vh-100">
 
-            <ChatRoomsList setChatRoomId={setChatRoomId} />
-            <ChatBox chatRoomId={chatRoomId} />
-            <ChatRoomSettingsBar chatRoomId={chatRoomId} />
+                    <ChatRoomsList setChatRoomId={setChatRoomId} />
+                    <ChatBox chatRoomId={chatRoomId} />
+                    <ChatRoomSettingsBar chatRoomId={chatRoomId} />
 
             </div>
+        </div>
         </>
     );
 } 

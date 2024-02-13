@@ -6,12 +6,12 @@ const Message = ({ sender, timeSent, content }) => {
 
     return (
         <div className="message-row">
-            <div className={`message-item${username !== sender ? " stranger" : ""}`}>
-                <div className="message-top">
-                    <span className="sender">{sender}</span>
-                    <span className="time-sent">{timeSent}</span>
+            <div className={`message-item p-2 w-25 d-flex flex-column ${username === sender ? " float-end" : ""}`}>
+                <div className="message-top d-flex justify-content-between">
+                    <span className="sender fs-6">{sender}</span>
+                    <span className="time-sent fs-6">{timeSent}</span>
                 </div>
-                <div className="message-content">
+                <div className={`message-content fs-5 p-1 text-white rounded${username === sender ? " bg-primary" : " bg-secondary"}`}>
                     <p>{content}</p>
                 </div>
             </div>

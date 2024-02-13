@@ -5,9 +5,11 @@ import ChatBoxFooter from "./ChatBoxFooter";
 const ChatBox = ({ chatRoomId }) => {
 
     return (
-        <div className="chat-box">
+        <div className="chat-box col-md-8">
+
             <MessageContainer chatRoomId={chatRoomId} />
             <ChatBoxFooter />
+            
         </div>
     );
 }
