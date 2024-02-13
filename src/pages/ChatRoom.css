@@ -2,6 +2,21 @@
     display: flex;
 }
 
+.chat-room-settings-bar {
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    width: 10%;
+}
+
+.chat-room-setting {
+    border: 1px solid black;
+    margin: 20px;
+    height: 10vh;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
 .chat-rooms-list {
     display: flex;
     flex-direction: column;
@@ -26,7 +41,7 @@
     flex-wrap: wrap;
     border: 1px solid black;
     border-radius: 5px;
-    width: 85%;
+    width: 75%;
     height: 90vh;
 }
 

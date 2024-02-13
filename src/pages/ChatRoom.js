@@ -6,6 +6,7 @@ import MessageContainer from "../components/MessageContainer";
 import "./ChatRoom.css";
 import ChatBox from "../components/ChatBox";
 import ChatRoomsList from "../components/ChatRoomsList";
+import ChatRoomSettingsBar from "../components/ChatRoomSettingsBar";
 
 const ChatRoom = () => {
     const [chatRoomId, setChatRoomId] = useState(null);
@@ -19,6 +20,7 @@ const ChatRoom = () => {
 
             <ChatRoomsList setChatRoomId={setChatRoomId} />
             <ChatBox chatRoomId={chatRoomId} />
+            <ChatRoomSettingsBar chatRoomId={chatRoomId} />
 
             </div>
         </>
