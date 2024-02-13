@@ -1,7 +1,8 @@
+import { useAuth } from "../context/AuthContext";
 
 const Message = ({ sender, timeSent, content }) => {
 
-    const username = "admin";
+    const { username } = useAuth();
 
     return (
         <div className="message-row">

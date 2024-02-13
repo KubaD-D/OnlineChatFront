@@ -2,9 +2,23 @@
     display: flex;
 }
 
-.chats-list {
-    background-color: lightblue;
+.chat-rooms-list {
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
     width: 15%;
+}
+
+.chat-room-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin: 1px;
+    height: fit-content;
+}
+
+.chat-room-item-title {
+    font-weight: bold;
 }
 
 .chat-box {

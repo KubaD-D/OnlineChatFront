@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { refreshRequest } from './utils/AuthSerivce';
 
 function App() {
-  const { username, setUsername } = useAuth();
+  const { setUsername } = useAuth();
 
   useEffect(() => {
 
@@ -33,7 +33,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/ChatRoom" element={<ChatRoom username="admin" />} />
+          <Route path="/ChatRoom" element={<ChatRoom />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Logout" element={<Logout />} />
         </Routes>

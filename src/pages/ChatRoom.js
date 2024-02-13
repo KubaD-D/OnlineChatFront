@@ -5,9 +5,9 @@ import MessageContainer from "../components/MessageContainer";
 
 import "./ChatRoom.css";
 import ChatBox from "../components/ChatBox";
+import ChatRoomsList from "../components/ChatRoomsList";
 
-const ChatRoom = ({username}) => {
-    const [messages, setMessages] = useState([]);
+const ChatRoom = () => {
     const [chatRoomId, setChatRoomId] = useState(null);
     const chatRoomIdRef = useRef("");
 
@@ -17,31 +17,12 @@ const ChatRoom = ({username}) => {
     }
 
     return (
-        <>
-            <NavBar />
-            {chatRoomId == null
-            ?
-            <Form className="w-25" onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="chatRoomId">
-                    <Form.Label>Chat Room ID</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Chat Room Id" ref={chatRoomIdRef} />
-                </Form.Group>
+            <div className="chat-room-container">
 
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
-            :
-            <>
-                 <div className="chat-room-container">
-                    <div className="chats-list"></div>
+            <ChatRoomsList />
+            <ChatBox chatRoomId={chatRoomId} />
 
-                    <ChatBox chatRoomId={chatRoomId} />
-
-                 </div>
-            </>
-            }
-        </>
+            </div>
     );
 } 
 
