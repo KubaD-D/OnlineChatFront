@@ -12,12 +12,16 @@ const ChatRoom = () => {
     const chatRoomIdRef = useRef("");
 
     return (
+        <>
+            <NavBar />
+
             <div className="chat-room-container">
 
             <ChatRoomsList setChatRoomId={setChatRoomId} />
             <ChatBox chatRoomId={chatRoomId} />
 
             </div>
+        </>
     );
 } 
 
