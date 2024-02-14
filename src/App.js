@@ -17,7 +17,7 @@ function App() {
     const refresh = async () => {
       const newUsername = await refreshRequest();
 
-      if(newUsername == null) {
+      if(!newUsername) {
         console.log("Error refreshing token!");
         return;
       }
@@ -37,7 +37,7 @@ function App() {
         <NavBar />
 
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<ChatRoom />} />
             <Route path="/ChatRoom" element={<ChatRoom />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Logout" element={<Logout />} />

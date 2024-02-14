@@ -14,7 +14,7 @@ const MessageContainer = ({ chatRoomId }) => {
             :
             data.map((message, index) => {
                 return (
-                <Message id={index} sender={message.sender} timeSent={message.timeSent} content={message.content} />
+                <Message key={index} sender={message.sender} timeSent={message.timeSent} content={message.content} />
                 );
             })
             }

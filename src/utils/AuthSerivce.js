@@ -28,36 +28,47 @@ export const loginRequest = async (username, password) => {
 
 export const refreshRequest = async () => {
 
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/User/refresh`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        credentials: "include"
-    });
+    try {
 
-    if(!response.ok) {
-        return null
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/User/refresh`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include"
+        });
+
+        if(!response.ok) {
+            throw new Error("Refreshing a token failed");
+        }
+
+        const data = await response.json();
+        const username = data.username;
+
+        return username;
+    } catch(err) {
+        console.error(err);
     }
-
-    const data = await response.json();
-    const username = data.username;
-
-    return username;
 }
 
 export const logoutRequest = async () => {
 
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/User/revoke`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        credentials: "include"
-    });
+    try {
 
-    if(!response.ok) {
-        console.error("Error logging out (revoking)");
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/User/revoke`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include"
+        });
+
+        if(!response.ok) {
+            console.error("Error logging out (revoking)");
+        }
+
+    } catch(err) {
+        console.error(err);
     }
 
 }
