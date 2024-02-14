@@ -3,17 +3,51 @@ import MessageContainer from "./MessageContainer";
 import ChatBoxFooter from "./ChatBoxFooter";
 import useFetch from "../utils/useFetch"
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+import { getData, postData } from "../utils/ApiService";
 
 const ChatBox = ({ chatRoomId }) => {
 
-    const { data } = useFetch(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/messages`, !chatRoomId);
+    //const { data } = useFetch(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/messages`, !chatRoomId);
+    const [messages, setMessages] = useState([]);
     const [connection, setConnection] = useState();
 
     useEffect(() => {
 
+        const getMessages = async () => {
+            if(chatRoomId) {
+                const messages = await getData(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/messages`);
+                console.log(messages);
+                setMessages(messages);
+            }
+        }
+
+        getMessages();
         joinRoom();
 
     }, [chatRoomId])
+
+    const sendMessage = async (messageToSend) => {
+
+        // through signalr
+        if(connection) {
+            try{
+                await connection.invoke("SendMessage", { chatRoomId, messageToSend });
+            } catch(err) {
+                console.error(err);
+            }
+        }
+
+        // through api
+        const apiData = await postData(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/send-message`, { content: messageToSend });
+        const newMessage = apiData.newMessage;
+
+        console.log(newMessage);
+
+        if(newMessage) {
+            setMessages([...messages, newMessage]);
+        }
+
+    }
 
     const joinRoom = async () => {
         try {
@@ -40,8 +74,8 @@ const ChatBox = ({ chatRoomId }) => {
     return (
         <div className="chat-box col-md-8">
 
-            <MessageContainer messages={data} />
-            <ChatBoxFooter />
+            <MessageContainer messages={messages} />
+            <ChatBoxFooter sendMessage={sendMessage} />
             
         </div>
     );
