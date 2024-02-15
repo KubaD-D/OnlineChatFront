@@ -1,11 +1,11 @@
 import { useAuth } from "../context/AuthContext";
 
-const Message = ({ sender, timeSent, content }) => {
+const Message = ({ sender, timeSent, content, className }) => {
 
     const { username } = useAuth();
 
     return (
-        <div className="message-row">
+        <div className={`message-row${className}`}>
             <div className={`message-item p-2 w-25 d-flex flex-column ${username === sender ? " float-end" : ""}`}>
                 <div className="message-top d-flex justify-content-between">
                     <span className="sender fs-6">{sender}</span>

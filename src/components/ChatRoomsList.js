@@ -6,7 +6,9 @@ const ChatRoomsList = ({ setChatRoomId }) => {
 
     if(!data) {
         return (
-            <ChatRoomItem chatRoomId={"Loading..."} />
+            <div className="chat-rooms-list col-md-2 bg-light d-flex flex-column">
+
+            </div>
         )
     }
 
