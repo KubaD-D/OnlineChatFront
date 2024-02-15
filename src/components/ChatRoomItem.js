@@ -1,8 +1,15 @@
 
-const ChatRoomItem = ( {chatRoomId, setChatRoomId, chatRoomTitle} ) => {
+const ChatRoomItem = ( {chatRoomId, setChatRoomId, chatRoomTitle, setChatRoomTitle} ) => {
 
     const handleClick = () => {
         setChatRoomId(chatRoomId);
+        
+        if(chatRoomTitle) {
+            setChatRoomTitle(chatRoomTitle);
+        } else {
+            setChatRoomTitle("Empty title");
+        }
+        
     }
 
     return (

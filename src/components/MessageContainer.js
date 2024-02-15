@@ -22,7 +22,7 @@ const MessageContainer = ({ messages }) => {
 
     return (
         <div className={`message-container d-flex flex-column justify-content-start`} 
-            style={{ height: "89vh", overflow: "auto" }}
+            style={{ height: "86vh", overflow: "auto" }}
             ref={messageContainerRef} >
 
             {!messages

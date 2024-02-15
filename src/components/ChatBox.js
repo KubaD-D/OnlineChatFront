@@ -70,8 +70,6 @@ const ChatBox = ({ chatRoomId }) => {
 
                 connection.on("UserJoined", (username, connectionId, crId) => {
                     console.log(`Username joined a chat hub: ${username}`);
-                    console.log(connectionId);
-                    console.log(crId);
                 })
 
                 connection.on("ReceiveMessage", (newMessage) => {

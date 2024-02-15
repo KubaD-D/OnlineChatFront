@@ -5,6 +5,7 @@ import ChatRoomSettingsBar from "../components/ChatRoomSettingsBar";
 
 const ChatRoom = () => {
     const [chatRoomId, setChatRoomId] = useState(null);
+    const [chatRoomTitle, setChatRoomTitle] = useState("Please join a room");
     const chatRoomIdRef = useRef("");
 
     return (
@@ -12,7 +13,8 @@ const ChatRoom = () => {
             <div className="container-fluid h-100">
                 <div className="row h-100">
 
-                    <ChatRoomsList setChatRoomId={setChatRoomId} />
+                    <h3 className="text-center bg-light m-0">{chatRoomTitle}</h3>
+                    <ChatRoomsList setChatRoomId={setChatRoomId} setChatRoomTitle={setChatRoomTitle} />
                     <ChatBox chatRoomId={chatRoomId} />
                     <ChatRoomSettingsBar chatRoomId={chatRoomId} />
 
