@@ -49,3 +49,28 @@ export const getData = async (url) => {
     }
 
 }
+
+export const deleteData = async (url, data) => {
+
+    try {
+
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify(data)
+        });
+
+        if(!response.ok) {
+            throw new Error(`Error deleting data: ${response.status} ${response.statusText}`);
+        }
+
+        const responseData = await response.json();
+        return responseData;
+    } catch(err) {
+        console.error(err);
+    }
+
+}
