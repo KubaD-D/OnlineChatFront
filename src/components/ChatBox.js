@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import MessageContainer from "./MessageContainer";
 import ChatBoxFooter from "./ChatBoxFooter";
 import useFetch from "../utils/useFetch"
@@ -10,8 +10,12 @@ const ChatBox = ({ chatRoomId }) => {
     //const { data } = useFetch(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/messages`, !chatRoomId);
     const [messages, setMessages] = useState([]);
     const [connection, setConnection] = useState();
+    const prevChatRoomIdRef = useRef(null);
 
     useEffect(() => {
+
+        leaveRoom(prevChatRoomIdRef.current);
+        prevChatRoomIdRef.current = chatRoomId;
 
         const getMessages = async () => {
             if(chatRoomId) {
@@ -31,7 +35,7 @@ const ChatBox = ({ chatRoomId }) => {
         // through signalr
         if(connection) {
             try{
-                await connection.invoke("SendMessage", { chatRoomId, messageToSend });
+                await connection.invoke("SendMessage", chatRoomId, messageToSend );
             } catch(err) {
                 console.error(err);
             }
@@ -41,30 +45,49 @@ const ChatBox = ({ chatRoomId }) => {
         const apiData = await postData(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/send-message`, { content: messageToSend });
         const newMessage = apiData.newMessage;
 
-        console.log(newMessage);
+    }
 
-        if(newMessage) {
-            setMessages([...messages, newMessage]);
+    const leaveRoom = async (id) => {
+        try {
+            if(connection && id) {
+                await connection.invoke("LeaveRoom", id);
+            }
+
+        } catch(err) {
+            console.error(err);
         }
-
     }
 
     const joinRoom = async () => {
         try {
+            
+            if(!connection) {
+                const connection = new HubConnectionBuilder()
+                .withUrl(`${process.env.REACT_APP_BACKEND_URL}/chat-room-hub`)
+                .configureLogging(LogLevel.Information)
+                .build();
+            
 
-            const connection = new HubConnectionBuilder()
-            .withUrl(`${process.env.REACT_APP_BACKEND_URL}/chat-room-hub`)
-            .configureLogging(LogLevel.Information)
-            .build();
+                connection.on("UserJoined", (username, connectionId, crId) => {
+                    console.log(`Username joined a chat hub: ${username}`);
+                    console.log(connectionId);
+                    console.log(crId);
+                })
 
-            connection.on("UserJoined", (username) => {
-                console.log(`Username joined a chat hub: ${username}`);
-            })
+                connection.on("ReceiveMessage", (newMessage) => {
 
-            await connection.start();
+                    if(newMessage) {
+                        setMessages(prevMessages => [...prevMessages, newMessage]);
+                    }
+
+                });
+
+                await connection.start();
+                setConnection(connection);
+
+            }
+
             await connection.invoke("JoinRoom", chatRoomId);
-
-            setConnection(connection);
 
         } catch(err) {
             console.error(err);
