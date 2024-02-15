@@ -1,7 +1,10 @@
-import { getData } from "../utils/ApiService";
+import { getData, postData, patchData } from "../utils/ApiService";
 import { deleteData } from "../utils/ApiService";
+import { useState, useRef } from "react";
 
-const ChatRoomSettingsBar = ({ chatRoomId, setModalTitle, setModalChildren, setIsModalActive }) => {
+const ChatRoomSettingsBar = ({ chatRoomId, setModalTitle, setModalChildren, setIsModalActive, handleChatRoomDelete }) => {
+
+    const newNameRef = useRef(null);
 
     const handleDeleteMember = async (member) => {
         const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/remove-user`;
@@ -22,10 +25,44 @@ const ChatRoomSettingsBar = ({ chatRoomId, setModalTitle, setModalChildren, setI
 
             if(responseData) {
                 setIsModalActive(false);
+                handleChatRoomDelete();
             }
-            
+
         } else {
             setIsModalActive(false);
+        }
+
+    }
+
+    const handleLeave = async (isConfirmed) => {
+
+        if(isConfirmed) {
+            const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/leave`;
+            
+            const responseData = await deleteData(url, chatRoomId);
+
+            if(responseData) {
+                setIsModalActive(false);
+                handleChatRoomDelete()
+            }
+
+        } else {
+            setIsModalActive(false);
+        }
+
+    }
+
+    const handleRename = async () => {
+        
+        if(newNameRef.current && newNameRef.current.value) {
+            const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/rename`;
+
+            const responseData = await patchData(url, {newTitle: newNameRef.current.value});
+
+            if(responseData) {
+                setIsModalActive(false);
+                handleChatRoomDelete()
+            }
         }
 
     }
@@ -55,14 +92,45 @@ const ChatRoomSettingsBar = ({ chatRoomId, setModalTitle, setModalChildren, setI
             break;
 
             case "leave":
+                setModalTitle("Are you sure you want to leave this chat room?");
 
+                setModalChildren(
+                    <div className="options-outer w-100 d-flex justify-content-center">
+                    <div className="options-inner w-75 d-flex justify-content-between">
+                        <button className="btn btn-primary px-5" onClick={() => handleLeave(true)}>Yes</button>
+                        <button className="btn btn-danger px-5" onClick={() => handleLeave(false)}>No</button>
+                    </div>
+                </div>
+                );
+
+                setIsModalActive(true);
             break;
 
             case "rename":
+                setModalTitle("Set a new name for the chat room")
 
+                setModalChildren(
+                    <div className="d-flex flex-column w-100">
+
+                        <input 
+                        type="text" 
+                        id="chat-room-name" 
+                        name="chat-room-name" 
+                        className="form-control w-100" 
+                        placeholder="Type new chat room name..."
+                        ref={newNameRef} />
+
+                        <div className="d-flex justify-content-center w-100">
+                            <button className="btn btn-success mt-3" onClick={handleRename}>Confirm new name</button>
+                        </div>
+
+                    </div>
+                );
+
+                setIsModalActive(true);
             break;
 
-            case "manage-members":
+            case "add-user":
 
             break;
 
@@ -116,9 +184,9 @@ const ChatRoomSettingsBar = ({ chatRoomId, setModalTitle, setModalChildren, setI
 
                     <button
                      className="chat-room-setting btn btn-success text-white w-50 m-3"
-                     name="manage-members"
+                     name="add-user"
                      onClick={handleClick}>
-                        Manage members
+                        Add a user
                     </button>
 
                     <button

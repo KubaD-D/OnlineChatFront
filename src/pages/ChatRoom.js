@@ -10,7 +10,14 @@ const ChatRoom = () => {
     const [isModalActive, setIsModalActive] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
     const [modalChildren, setModalChildren] = useState("");
+    const [toggleChatListRefresh, setToggleChatListRefresh] = useState(false);
     const chatRoomIdRef = useRef("");
+
+    const handleChatRoomDelete = () => {
+        setToggleChatListRefresh(!toggleChatListRefresh);
+        setChatRoomTitle("Please join a room");
+        setChatRoomId(null);
+    }
 
     return (
         <>
@@ -18,13 +25,17 @@ const ChatRoom = () => {
                 <div className="row h-100">
 
                     <h3 className="text-center bg-light m-0">{chatRoomTitle}</h3>
-                    <ChatRoomsList setChatRoomId={setChatRoomId} setChatRoomTitle={setChatRoomTitle} />
+                    <ChatRoomsList 
+                        key={toggleChatListRefresh}
+                        setChatRoomId={setChatRoomId} 
+                        setChatRoomTitle={setChatRoomTitle} />
                     <ChatBox chatRoomId={chatRoomId} />
                     <ChatRoomSettingsBar 
                         chatRoomId={chatRoomId} 
                         setModalTitle={setModalTitle} 
                         setModalChildren={setModalChildren} 
-                        setIsModalActive={setIsModalActive}/>
+                        setIsModalActive={setIsModalActive}
+                        handleChatRoomDelete={handleChatRoomDelete}/>
 
                 </div>
             </div>

@@ -74,3 +74,26 @@ export const deleteData = async (url, data) => {
     }
 
 }
+
+export const patchData = async (url, data) => {
+    try {
+        
+        const response = await fetch(url, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify(data)
+        });
+
+        if(!response.ok) {
+            throw new Error(`Error patching data: ${response.status} ${response.statusText}`);
+        }
+
+        const responseData = await response.json();
+        return responseData;
+    } catch(err) {
+        console.error(err);
+    }
+}
