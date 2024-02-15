@@ -18,8 +18,10 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            await login(username, password);
-            navigateTo("/");
+            const response = await login(username, password);
+            if(response) {
+                navigateTo("/");
+            } 
         } catch(err) {
             console.error(err);
         }

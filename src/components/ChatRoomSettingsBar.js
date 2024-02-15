@@ -1,10 +1,13 @@
+import { useAuth } from "../context/AuthContext";
 import { getData, postData, patchData } from "../utils/ApiService";
 import { deleteData } from "../utils/ApiService";
 import { useState, useRef } from "react";
 
-const ChatRoomSettingsBar = ({ chatRoomId, setModalTitle, setModalChildren, setIsModalActive, handleChatRoomDelete }) => {
+const ChatRoomSettingsBar = ({ chatRoomId, chatRoomOwner, setModalTitle, setModalChildren, setIsModalActive, handleChatRoomDelete }) => {
 
+    const { username } = useAuth();
     const newNameRef = useRef(null);
+    const newUserRef = useRef(null);
 
     const handleDeleteMember = async (member) => {
         const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/remove-user`;
@@ -67,6 +70,20 @@ const ChatRoomSettingsBar = ({ chatRoomId, setModalTitle, setModalChildren, setI
 
     }
 
+    const handleAddUser = async () => {
+
+        if(newUserRef.current && newUserRef.current.value) {
+            const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/add-user`;
+
+            const responseData = await postData(url, {username: newUserRef.current.value});
+
+            if(responseData) {
+                setIsModalActive(false);
+            }
+        }
+
+    }
+
     const handleClick = async (e) => {
 
         switch(e.target.name) {
@@ -81,7 +98,8 @@ const ChatRoomSettingsBar = ({ chatRoomId, setModalTitle, setModalChildren, setI
                         return (
                             <div className="user-item w-100 d-flex justify-content-between mt-2">
                                 <span>{member}</span>
-                                <button className="btn btn-danger ml-auto" onClick={() => handleDeleteMember(member)} >Delete</button>
+                                <button className="btn btn-danger ml-auto" onClick={() => handleDeleteMember(member)} 
+                                disabled={username !== chatRoomOwner} >Delete</button>
                             </div>
                         );
                     })}
@@ -131,6 +149,28 @@ const ChatRoomSettingsBar = ({ chatRoomId, setModalTitle, setModalChildren, setI
             break;
 
             case "add-user":
+                
+                setModalTitle("Add a new user to the chat room");
+
+                setModalChildren(
+                    <div className="d-flex flex-column w-100">
+
+                        <input 
+                        type="text" 
+                        id="chat-room-name" 
+                        name="chat-room-name" 
+                        className="form-control w-100" 
+                        placeholder="Type new chat room name..."
+                        ref={newUserRef} />
+
+                        <div className="d-flex justify-content-center w-100">
+                            <button className="btn btn-success mt-3" onClick={handleAddUser}>Confirm</button>
+                        </div>
+
+                    </div>
+                );
+
+                setIsModalActive(true);
 
             break;
 
@@ -171,28 +211,32 @@ const ChatRoomSettingsBar = ({ chatRoomId, setModalTitle, setModalChildren, setI
                     <button
                      className="chat-room-setting btn btn-danger text-white w-50 m-3"
                      name="leave"
-                     onClick={handleClick}>
+                     onClick={handleClick}
+                     disabled={username === chatRoomOwner}>
                         Leave
                     </button>
 
                     <button
                      className="chat-room-setting btn btn-warning text-white w-50 m-3"
                      name="rename"
-                     onClick={handleClick}>
+                     onClick={handleClick}
+                     disabled={username !== chatRoomOwner}>
                         Rename
                     </button>
 
                     <button
                      className="chat-room-setting btn btn-success text-white w-50 m-3"
                      name="add-user"
-                     onClick={handleClick}>
+                     onClick={handleClick}
+                     disabled={username !== chatRoomOwner}>
                         Add a user
                     </button>
 
                     <button
                      className="chat-room-setting btn btn-dark text-white w-50 m-3"
                      name="remove"
-                     onClick={handleClick}>
+                     onClick={handleClick}
+                     disabled={username !== chatRoomOwner}>
                         Remove chat room
                     </button>
                 </>

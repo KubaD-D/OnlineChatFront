@@ -3,15 +3,33 @@ import ChatBox from "../components/ChatBox";
 import ChatRoomsList from "../components/ChatRoomsList";
 import ChatRoomSettingsBar from "../components/ChatRoomSettingsBar";
 import { Modal, ModalBody } from "react-bootstrap";
+import { getData } from "../utils/ApiService";
 
 const ChatRoom = () => {
     const [chatRoomId, setChatRoomId] = useState(null);
     const [chatRoomTitle, setChatRoomTitle] = useState("Please join a room");
+    const [chatRoomOwner, setChatRoomOwner] = useState(null);
     const [isModalActive, setIsModalActive] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
     const [modalChildren, setModalChildren] = useState("");
     const [toggleChatListRefresh, setToggleChatListRefresh] = useState(false);
     const chatRoomIdRef = useRef("");
+
+    useEffect(() => {
+
+        const getChatRoomOwner = async () => {
+            const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/owner`
+
+            const responseData = await getData(url);
+
+            if(responseData && responseData.owner) {
+                setChatRoomOwner(responseData.owner)
+            }
+        }
+
+        getChatRoomOwner();
+
+    }, [chatRoomId])
 
     const handleChatRoomDelete = () => {
         setToggleChatListRefresh(!toggleChatListRefresh);
@@ -32,10 +50,11 @@ const ChatRoom = () => {
                     <ChatBox chatRoomId={chatRoomId} />
                     <ChatRoomSettingsBar 
                         chatRoomId={chatRoomId} 
+                        chatRoomOwner={chatRoomOwner}
                         setModalTitle={setModalTitle} 
                         setModalChildren={setModalChildren} 
                         setIsModalActive={setIsModalActive}
-                        handleChatRoomDelete={handleChatRoomDelete}/>
+                        handleChatRoomDelete={handleChatRoomDelete} />
 
                 </div>
             </div>

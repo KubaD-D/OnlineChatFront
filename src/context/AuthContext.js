@@ -19,6 +19,9 @@ export const AuthProvider = ({ children }) => {
             setUsername(responseUsername);
 
             console.log(`Auth context username ${username}`);
+
+            return responseUsername;
+
         } catch(err) {
             console.error(err);
         }

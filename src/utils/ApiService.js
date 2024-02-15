@@ -77,7 +77,7 @@ export const deleteData = async (url, data) => {
 
 export const patchData = async (url, data) => {
     try {
-        
+
         const response = await fetch(url, {
             method: "PATCH",
             headers: {
