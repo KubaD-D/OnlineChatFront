@@ -1,7 +1,8 @@
 import { Modal, ModalBody } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { useRef, useState } from "react";
-import { putData } from "../utils/ApiService";
+import { deleteData, putData } from "../utils/ApiService";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
 
@@ -14,7 +15,12 @@ const Profile = () => {
     const repeatNewPasswordRef = useRef(null);
     const passwordsDontMatchRef = useRef(null);
 
-    const { username } = useAuth();
+    const confirmPasswordRef = useRef(null);
+    const confirmPasswordErrorMessageRef = useRef(null);
+
+    const { username, setUsername } = useAuth();
+
+    const navigateTo = useNavigate();
 
     const handlePasswordChange = async () => {
         const oldPassword = oldPasswordRef.current.value;
@@ -72,6 +78,33 @@ const Profile = () => {
         }
     }
 
+    const handleDeleteAccount = async () => {
+
+        const confirmPassword = confirmPasswordRef.current.value;
+
+        if(!confirmPassword) {
+            confirmPasswordRef.current.classList.add("is-invalid");
+            confirmPasswordErrorMessageRef.current.textContent = "Password cannot be empty";
+
+            setTimeout(() => {
+                confirmPasswordRef.current.classList.remove("is-invalid");
+                confirmPasswordErrorMessageRef.current.textContent = "";
+            }, 3000)
+        } else {
+            const url = `${process.env.REACT_APP_BACKEND_URL}/api/User/delete`;
+
+            const response = await deleteData(url, {password: confirmPassword}, false);
+
+            if(response && response.ok) {
+                
+                setUsername(null);
+                navigateTo("/");
+
+            }
+        }
+
+    }
+
     const handleClickChangePassword = () => {
 
         setModalTitle("Change your password");
@@ -116,8 +149,21 @@ const Profile = () => {
         setModalTitle("Are you sure you want to delete your account?");
 
         setModalChildren(
-            <div className="d-flex justify-content-center w-100">
-                <button className="btn btn-danger">DELETE YOUR ACCOUNT</button>
+            <div className="w-100">
+
+                <div className="text-center text-danger">
+                    <span ref={confirmPasswordErrorMessageRef}></span>
+                </div>
+
+                <label htmlFor="confirm-password">Confirm your password:</label>
+                <input type="password" 
+                        id="confirm-password" 
+                        className="mb-4 form-control"
+                        ref={confirmPasswordRef} />
+
+                <div className="d-flex justify-content-center w-100">
+                    <button className="btn btn-danger" onClick={handleDeleteAccount}>DELETE YOUR ACCOUNT</button>
+                </div>
             </div>
         );
 
