@@ -1,11 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
 import ChatRoom from './pages/ChatRoom';
-import Home from './pages/Home';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Register from './pages/Register';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { useAuth } from './context/AuthContext';
 import { useEffect } from 'react';
 import { refreshRequest } from './utils/AuthSerivce';
 import NavBar from './components/NavBar';

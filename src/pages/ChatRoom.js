@@ -4,16 +4,17 @@ import ChatRoomsList from "../components/ChatRoomsList";
 import ChatRoomSettingsBar from "../components/ChatRoomSettingsBar";
 import { Modal, ModalBody } from "react-bootstrap";
 import { getData } from "../utils/ApiService";
+import { useAuth } from "../context/AuthContext";
 
 const ChatRoom = () => {
     const [chatRoomId, setChatRoomId] = useState(null);
-    const [chatRoomTitle, setChatRoomTitle] = useState("Please join a room");
+    const [chatRoomTitle, setChatRoomTitle] = useState("");
     const [chatRoomOwner, setChatRoomOwner] = useState(null);
     const [isModalActive, setIsModalActive] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
     const [modalChildren, setModalChildren] = useState("");
     const [toggleChatListRefresh, setToggleChatListRefresh] = useState(false);
-    const chatRoomIdRef = useRef("");
+    const { username } = useAuth();
 
     useEffect(() => {
 
@@ -28,6 +29,10 @@ const ChatRoom = () => {
                     setChatRoomOwner(responseData.owner)
                 }
             }
+        }
+
+        if(!username) {
+            setChatRoomTitle("Please log in");
         }
 
         getChatRoomOwner();

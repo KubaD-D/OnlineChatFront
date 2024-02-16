@@ -28,35 +28,37 @@ const Login = () => {
     }
 
     return (
-        <>
-            <Container className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center mt-5">
+            <div className="border rounded p-4">
 
-                <Form className="w-25 border p-3 mt-5" onSubmit={e => handleSubmit(e)}>
-                    <Form.Group className="mb-3" controlId="formLogin">
-                        <Form.Label>Login</Form.Label>
-                        <Form.Control
-                         type="text" 
-                         placeholder="Enter your login"
-                         value={username}
-                         onChange={e => setUsername(e.target.value)} />
-                    </Form.Group>
+                <form onSubmit={handleSubmit}>
 
-                    <Form.Group className="mb-3" controlId="formPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control 
-                        type="password" 
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)} />
-                    </Form.Group>
+                    <label htmlFor="username">Username</label>
+                    <input type="text"
+                            className="form-control mb-2"
+                            id="username"
+                            placeholder="Enter your username..."
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)} />
 
-                    <div className="text-center">
-                        <Button variant={`primary${!username || !password ? " disabled" : ""}`} type="submit">Log in</Button>
+                    <label htmlFor="password">Password</label>
+                    <input type="password"
+                            className="form-control mb-2"
+                            id="password"
+                            placeholder="Enter your password..."
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)} />
+
+                    <div className="d-flex justify-content-center">
+                        <button type="submit"
+                                className="btn btn-primary mt-4"
+                                disabled={!username && !password}>Log in</button>
                     </div>
-                </Form>
 
-            </Container>
-        </>
+                </form>
+
+            </div>
+        </div>
     );
 }
 
