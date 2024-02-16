@@ -17,9 +17,14 @@ const Logout = () => {
         <>
             {username
             ?
-            <h1>There was an error in logout attempt</h1>
+                <div className="d-flex justify-content-center mt-4">
+                    <h1>There was an error in your logout attempt</h1>
+                </div>
             :
-            <h1>You have been logged out succesfully</h1>}
+                <div className="d-flex justify-content-center mt-4">
+                    <h1>You have been logged out successfully</h1>
+                </div>
+            }
         </>
     )
 }
