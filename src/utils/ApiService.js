@@ -1,5 +1,5 @@
 
-export const postData = async (url, dataToPost) => {
+export const postData = async (url, dataToPost, isDataResponded = true) => {
 
     try {
 
@@ -16,8 +16,13 @@ export const postData = async (url, dataToPost) => {
             throw new Error(`Error posting data: ${response.status} ${response.statusText}`);
         }
 
-        const data = await response.json();
-        return data;
+        if(isDataResponded) {
+            const responseData = await response.json();
+            return responseData
+        } else {
+            console.log(response);
+            return response;
+        }
 
     } catch(err) {
         console.error(err);
@@ -25,7 +30,7 @@ export const postData = async (url, dataToPost) => {
 
 }
 
-export const getData = async (url) => {
+export const getData = async (url, isDataResponded = true) => {
 
     try {
 
@@ -41,8 +46,13 @@ export const getData = async (url) => {
             throw new Error(`Error getting data: ${response.status} ${response.statusText}`);
         }
 
-        const data = await response.json();
-        return data;
+        if(isDataResponded) {
+            const responseData = await response.json();
+            return responseData
+        } else {
+            console.log(response);
+            return response;
+        }
 
     } catch(err) {
         console.error(err);
@@ -50,7 +60,7 @@ export const getData = async (url) => {
 
 }
 
-export const deleteData = async (url, data) => {
+export const deleteData = async (url, data, isDataResponded = true) => {
 
     try {
 
@@ -67,15 +77,21 @@ export const deleteData = async (url, data) => {
             throw new Error(`Error deleting data: ${response.status} ${response.statusText}`);
         }
 
-        const responseData = await response.json();
-        return responseData;
+        if(isDataResponded) {
+            const responseData = await response.json();
+            return responseData
+        } else {
+            console.log(response);
+            return response;
+        }
+
     } catch(err) {
         console.error(err);
     }
 
 }
 
-export const patchData = async (url, data) => {
+export const patchData = async (url, data, isDataResponded = true) => {
     try {
 
         const response = await fetch(url, {
@@ -91,8 +107,14 @@ export const patchData = async (url, data) => {
             throw new Error(`Error patching data: ${response.status} ${response.statusText}`);
         }
 
-        const responseData = await response.json();
-        return responseData;
+        if(isDataResponded) {
+            const responseData = await response.json();
+            return responseData
+        } else {
+            console.log(response);
+            return response;
+        }
+
     } catch(err) {
         console.error(err);
     }
