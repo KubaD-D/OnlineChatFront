@@ -20,7 +20,7 @@ const ChatBox = ({ chatRoomId }) => {
         const getMessages = async () => {
             if(chatRoomId) {
                 const messages = await getData(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/messages`);
-                console.log(messages);
+                //console.log(messages);
                 setMessages(messages);
             }
         }
@@ -69,7 +69,7 @@ const ChatBox = ({ chatRoomId }) => {
             
 
                 connection.on("UserJoined", (username, connectionId, crId) => {
-                    console.log(`Username joined a chat hub: ${username}`);
+                    //console.log(`Username joined a chat hub: ${username}`);
                 })
 
                 connection.on("ReceiveMessage", (newMessage) => {

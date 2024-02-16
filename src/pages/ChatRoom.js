@@ -18,12 +18,15 @@ const ChatRoom = () => {
     useEffect(() => {
 
         const getChatRoomOwner = async () => {
-            const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/owner`
+            if(chatRoomId) {
 
-            const responseData = await getData(url);
+                const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/owner`
 
-            if(responseData && responseData.owner) {
-                setChatRoomOwner(responseData.owner)
+                const responseData = await getData(url);
+
+                if(responseData && responseData.owner) {
+                    setChatRoomOwner(responseData.owner)
+                }
             }
         }
 

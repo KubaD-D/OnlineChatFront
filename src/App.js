@@ -4,6 +4,7 @@ import ChatRoom from './pages/ChatRoom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
+import Register from './pages/Register';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { useEffect } from 'react';
 import { refreshRequest } from './utils/AuthSerivce';
@@ -41,6 +42,7 @@ function App() {
             <Route path="/ChatRoom" element={<ChatRoom />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Logout" element={<Logout />} />
+            <Route path="/Register" element={<Register />} />
           </Routes>
 
         </div>

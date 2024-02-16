@@ -202,43 +202,47 @@ const ChatRoomSettingsBar = ({ chatRoomId, chatRoomOwner, setModalTitle, setModa
             &&
                 <>
                     <button
-                     className="chat-room-setting btn btn-info text-white w-50 m-3"
+                     className="chat-room-setting btn btn-primary text-white w-50 m-3"
                      name="display-members"
                      onClick={handleClick}>
                         Display members
                     </button>
 
-                    <button
-                     className="chat-room-setting btn btn-danger text-white w-50 m-3"
-                     name="leave"
-                     onClick={handleClick}
-                     disabled={username === chatRoomOwner}>
-                        Leave
+                    {username === chatRoomOwner ||
+                        <button
+                        className="chat-room-setting btn btn-danger text-white w-50 m-3"
+                        name="leave"
+                        onClick={handleClick} >
+                            Leave
                     </button>
+                    }
 
-                    <button
-                     className="chat-room-setting btn btn-warning text-white w-50 m-3"
-                     name="rename"
-                     onClick={handleClick}
-                     disabled={username !== chatRoomOwner}>
-                        Rename
-                    </button>
+                    {username !== chatRoomOwner ||
+                        <button
+                        className="chat-room-setting btn btn-warning text-white w-50 m-3"
+                        name="rename"
+                        onClick={handleClick} >
+                            Rename
+                        </button>
+                    }
 
-                    <button
-                     className="chat-room-setting btn btn-success text-white w-50 m-3"
-                     name="add-user"
-                     onClick={handleClick}
-                     disabled={username !== chatRoomOwner}>
-                        Add a user
-                    </button>
+                    {username !== chatRoomOwner ||
+                        <button
+                        className="chat-room-setting btn btn-success text-white w-50 m-3"
+                        name="add-user"
+                        onClick={handleClick} >
+                            Add a user
+                        </button>
+                    }
 
-                    <button
-                     className="chat-room-setting btn btn-dark text-white w-50 m-3"
-                     name="remove"
-                     onClick={handleClick}
-                     disabled={username !== chatRoomOwner}>
-                        Remove chat room
-                    </button>
+                    {username !== chatRoomOwner ||
+                        <button
+                        className="chat-room-setting btn btn-dark text-white w-50 m-3"
+                        name="remove"
+                        onClick={handleClick} >
+                            Remove chat room
+                        </button>
+                    }
                 </>
             }
 

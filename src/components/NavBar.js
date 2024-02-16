@@ -21,12 +21,15 @@ const NavBar = () => {
               {username
               ?
               <>
-                <Nav.Link as={Link} to="/Profile">{`${username} |`}</Nav.Link>
+                <Nav.Link as={Link} to="/Profile">{`${username}`}</Nav.Link>
                 <Nav.Link as={Link} to="/Logout">Log out</Nav.Link>
               </>
               :
-              <Nav.Link as={Link} to="/Login">Log in</Nav.Link>}
-              
+              <>
+                <Nav.Link as={Link} to="/Register">Register</Nav.Link>
+                <Nav.Link as={Link} to="/Login">Log in</Nav.Link>
+              </>
+              }
             </Nav>
   
           </Navbar.Collapse>
