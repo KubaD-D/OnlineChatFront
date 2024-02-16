@@ -19,20 +19,15 @@ const ChatRoomSettingsBar = ({ chatRoomId, chatRoomOwner, setModalTitle, setModa
         }
     }
 
-    const handleRemove = async (isConfirmed) => {
+    const handleRemove = async () => {
 
-        if(isConfirmed) {
-            const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}`;
+        const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}`;
 
-            const responseData = await deleteData(url);
+        const responseData = await deleteData(url);
 
-            if(responseData) {
-                setIsModalActive(false);
-                handleChatRoomDelete();
-            }
-
-        } else {
+        if(responseData) {
             setIsModalActive(false);
+            handleChatRoomDelete();
         }
 
     }
@@ -179,10 +174,7 @@ const ChatRoomSettingsBar = ({ chatRoomId, chatRoomOwner, setModalTitle, setModa
 
                 setModalChildren(
                     <div className="options-outer w-100 d-flex justify-content-center">
-                        <div className="options-inner w-75 d-flex justify-content-between">
-                            <button className="btn btn-primary px-5" onClick={() => handleRemove(true)}>Yes</button>
-                            <button className="btn btn-danger px-5" onClick={() => handleRemove(false)}>No</button>
-                        </div>
+                        <button className="btn btn-danger px-5" onClick={handleRemove}>Remove</button>
                     </div>
                 );
 

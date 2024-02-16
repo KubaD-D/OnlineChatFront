@@ -96,7 +96,7 @@ const ChatBox = ({ chatRoomId }) => {
         <div className="chat-box col-md-8">
 
             <MessageContainer messages={messages} />
-            <ChatBoxFooter sendMessage={sendMessage} />
+            {chatRoomId && <ChatBoxFooter sendMessage={sendMessage} />}
             
         </div>
     );

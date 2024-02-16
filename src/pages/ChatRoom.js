@@ -49,7 +49,12 @@ const ChatRoom = () => {
                     <ChatRoomsList 
                         key={toggleChatListRefresh}
                         setChatRoomId={setChatRoomId} 
-                        setChatRoomTitle={setChatRoomTitle} />
+                        setChatRoomTitle={setChatRoomTitle}
+                        toggleChatListRefresh={toggleChatListRefresh}
+                        setToggleChatListRefresh={setToggleChatListRefresh}
+                        setModalTitle={setModalTitle} 
+                        setModalChildren={setModalChildren} 
+                        setIsModalActive={setIsModalActive} />
                     <ChatBox chatRoomId={chatRoomId} />
                     <ChatRoomSettingsBar 
                         chatRoomId={chatRoomId} 

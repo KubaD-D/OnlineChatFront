@@ -36,15 +36,17 @@ function App() {
 
       <div className="d-flex flex-column vh-100">
         <NavBar />
+        <div className="container-fluid">
 
-          <Routes>
-            <Route path="/" element={<ChatRoom />} />
-            <Route path="/ChatRoom" element={<ChatRoom />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="/Logout" element={<Logout />} />
-            <Route path="/Register" element={<Register />} />
-          </Routes>
+            <Routes>
+              <Route path="/" element={<ChatRoom />} />
+              <Route path="/ChatRoom" element={<ChatRoom />} />
+              <Route path="/Login" element={<Login />} />
+              <Route path="/Logout" element={<Logout />} />
+              <Route path="/Register" element={<Register />} />
+            </Routes>
 
+          </div>
         </div>
 
       </BrowserRouter>
