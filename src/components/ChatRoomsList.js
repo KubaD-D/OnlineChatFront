@@ -15,7 +15,7 @@ const ChatRoomsList = ({ setChatRoomId, setChatRoomTitle, toggleChatListRefresh,
         const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom`;
         const title = titleRef.current.value;
 
-        postData(url, {title});
+        await postData(url, {title});
 
         setToggleChatListRefresh(!toggleChatListRefresh);
         setIsModalActive(false);
@@ -46,7 +46,7 @@ const ChatRoomsList = ({ setChatRoomId, setChatRoomTitle, toggleChatListRefresh,
     }
 
     return (
-        <div className="chat-rooms-list col-md-2 bg-light d-flex flex-column">
+        <div className="chat-rooms-list col-md-2 bg-light d-flex flex-column" style={{ height: "90vh", overflow: "auto" }}>
             
             {username &&
                 <div className="chat-room-item btn btn-primary d-flex flex-wrap" onClick={handleClick}>
