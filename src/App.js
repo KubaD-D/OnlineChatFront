@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
 import ChatRoom from './pages/ChatRoom';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Register from './pages/Register';
+import Profile from './pages/Profile';
 import { useAuth } from './context/AuthContext';
 import { useEffect } from 'react';
 import { refreshRequest } from './utils/AuthSerivce';
-import NavBar from './components/NavBar';
 
 function App() {
   const { setUsername } = useAuth();
@@ -42,6 +43,7 @@ function App() {
               <Route path="/Login" element={<Login />} />
               <Route path="/Logout" element={<Logout />} />
               <Route path="/Register" element={<Register />} />
+              <Route path="/Profile" element={<Profile />} />
             </Routes>
 
           </div>

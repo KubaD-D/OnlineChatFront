@@ -97,3 +97,32 @@ export const patchData = async (url, data) => {
         console.error(err);
     }
 }
+
+export const putData = async (url, data, isDataResponded = true) => {
+    try {
+
+        const response = await fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify(data)
+        });
+
+        if(!response.ok) {
+            throw new Error(`Error putting data: ${response.status} ${response.statusText}`);
+        }
+
+        if(isDataResponded) {
+            const responseData = await response.json();
+            return responseData
+        } else {
+            console.log(response);
+            return response;
+        }
+
+    } catch(err) {
+        console.error(err);
+    }
+}

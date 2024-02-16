@@ -19,7 +19,7 @@ const ChatRoom = () => {
         const getChatRoomOwner = async () => {
             if(chatRoomId) {
 
-                const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/owner`
+                const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/owner`;
 
                 const responseData = await getData(url);
 
