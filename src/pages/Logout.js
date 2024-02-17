@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import NavBar from "../components/NavBar";
 import { useAuth } from "../context/AuthContext";
 
 

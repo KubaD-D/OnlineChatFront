@@ -1,7 +1,6 @@
 import { useAuth } from "../context/AuthContext";
-import { getData, postData, patchData } from "../utils/ApiService";
-import { deleteData } from "../utils/ApiService";
-import { useState, useRef } from "react";
+import {  fetchData } from "../utils/ApiService";
+import {  useRef } from "react";
 
 const ChatRoomSettingsBar = ({ chatRoomId, chatRoomOwner, setModalTitle, setModalChildren, setIsModalActive, handleChatRoomDelete }) => {
 
@@ -12,9 +11,9 @@ const ChatRoomSettingsBar = ({ chatRoomId, chatRoomOwner, setModalTitle, setModa
     const handleDeleteMember = async (member) => {
         const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/remove-user`;
 
-        const responseData = await deleteData(url, {username: member});
+        const response = await fetchData(url, "DELETE", {username: member}, false);
 
-        if(responseData) {
+        if(response && response.ok) {
             setIsModalActive(false);
         }
     }
@@ -23,29 +22,24 @@ const ChatRoomSettingsBar = ({ chatRoomId, chatRoomOwner, setModalTitle, setModa
 
         const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}`;
 
-        const responseData = await deleteData(url);
+        const response = await fetchData(url, "DELETE", {}, false);
 
-        if(responseData) {
+        if(response && response.ok) {
             setIsModalActive(false);
             handleChatRoomDelete();
         }
 
     }
 
-    const handleLeave = async (isConfirmed) => {
+    const handleLeave = async () => {
 
-        if(isConfirmed) {
-            const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/leave`;
-            
-            const responseData = await deleteData(url, chatRoomId);
+        const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/leave`;
+        
+        const response= await fetchData(url, "DELETE", {}, false);
 
-            if(responseData) {
-                setIsModalActive(false);
-                handleChatRoomDelete()
-            }
-
-        } else {
+        if(response && response.ok) {
             setIsModalActive(false);
+            handleChatRoomDelete()
         }
 
     }
@@ -55,9 +49,9 @@ const ChatRoomSettingsBar = ({ chatRoomId, chatRoomOwner, setModalTitle, setModa
         if(newNameRef.current && newNameRef.current.value) {
             const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/rename`;
 
-            const responseData = await patchData(url, {newTitle: newNameRef.current.value});
+            const response = await fetchData(url, "PATCH", {newTitle: newNameRef.current.value}, false);
 
-            if(responseData) {
+            if(response && response.ok) {
                 setIsModalActive(false);
                 handleChatRoomDelete()
             }
@@ -70,9 +64,9 @@ const ChatRoomSettingsBar = ({ chatRoomId, chatRoomOwner, setModalTitle, setModa
         if(newUserRef.current && newUserRef.current.value) {
             const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/add-user`;
 
-            const responseData = await postData(url, {username: newUserRef.current.value});
+            const response = await fetchData(url, "PUT", {username: newUserRef.current.value}, false);
 
-            if(responseData) {
+            if(response && response.ok) {
                 setIsModalActive(false);
             }
         }
@@ -83,7 +77,9 @@ const ChatRoomSettingsBar = ({ chatRoomId, chatRoomOwner, setModalTitle, setModa
 
         switch(e.target.name) {
             case "display-members":
-                const members = await getData(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/get-users`);
+                const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/get-users`;
+
+                const members = await fetchData(url, "GET");
 
                 setModalTitle("Chat room members");
 
@@ -110,8 +106,8 @@ const ChatRoomSettingsBar = ({ chatRoomId, chatRoomOwner, setModalTitle, setModa
                 setModalChildren(
                     <div className="options-outer w-100 d-flex justify-content-center">
                     <div className="options-inner w-75 d-flex justify-content-between">
-                        <button className="btn btn-primary px-5" onClick={() => handleLeave(true)}>Yes</button>
-                        <button className="btn btn-danger px-5" onClick={() => handleLeave(false)}>No</button>
+                        <button className="btn btn-primary px-5" onClick={handleLeave}>Yes</button>
+                        <button className="btn btn-danger px-5" onClick={() => setIsModalActive(false)}>No</button>
                     </div>
                 </div>
                 );
