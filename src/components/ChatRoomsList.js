@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useAuth } from "../context/AuthContext";
-import { postData } from "../utils/ApiService";
+import {  fetchData } from "../utils/ApiService";
 import useFetch from "../utils/useFetch";
 import ChatRoomItem from "./ChatRoomItem";
 
@@ -15,10 +15,12 @@ const ChatRoomsList = ({ setChatRoomId, setChatRoomTitle, toggleChatListRefresh,
         const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom`;
         const title = titleRef.current.value;
 
-        await postData(url, {title});
+        const response = await fetchData(url, "POST", {title}, false);
 
-        setToggleChatListRefresh(!toggleChatListRefresh);
-        setIsModalActive(false);
+        if(response && response.ok) {
+            setToggleChatListRefresh(!toggleChatListRefresh);
+            setIsModalActive(false);
+        }
     }
 
     const handleClick = () => {

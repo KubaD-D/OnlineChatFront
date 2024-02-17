@@ -3,7 +3,7 @@ import ChatBox from "../components/ChatBox";
 import ChatRoomsList from "../components/ChatRoomsList";
 import ChatRoomSettingsBar from "../components/ChatRoomSettingsBar";
 import { Modal, ModalBody } from "react-bootstrap";
-import { getData } from "../utils/ApiService";
+import { fetchData } from "../utils/ApiService";
 
 const ChatRoom = () => {
     const [chatRoomId, setChatRoomId] = useState(null);
@@ -21,7 +21,7 @@ const ChatRoom = () => {
 
                 const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/owner`;
 
-                const responseData = await getData(url);
+                const responseData = await fetchData(url, "GET");
 
                 if(responseData && responseData.owner) {
                     setChatRoomOwner(responseData.owner)

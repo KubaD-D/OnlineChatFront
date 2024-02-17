@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import MessageContainer from "./MessageContainer";
 import ChatBoxFooter from "./ChatBoxFooter";
-import useFetch from "../utils/useFetch"
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
-import { getData, postData } from "../utils/ApiService";
+import { fetchData } from "../utils/ApiService";
 
 const ChatBox = ({ chatRoomId }) => {
 
@@ -19,8 +18,9 @@ const ChatBox = ({ chatRoomId }) => {
 
         const getMessages = async () => {
             if(chatRoomId) {
-                const messages = await getData(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/messages`);
-                //console.log(messages);
+                const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/messages`;
+                const messages = await fetchData(url, "GET");
+
                 setMessages(messages);
             }
         }
@@ -42,8 +42,9 @@ const ChatBox = ({ chatRoomId }) => {
         }
 
         // through api
-        const apiData = await postData(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/send-message`, { content: messageToSend });
-        const newMessage = apiData.newMessage;
+        const url = `${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/send-message`;
+
+        await fetchData(url, "POST", { content: messageToSend });
 
     }
 

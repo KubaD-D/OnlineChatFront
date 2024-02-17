@@ -1,7 +1,7 @@
 import { Modal, ModalBody } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { useRef, useState } from "react";
-import { deleteData, putData } from "../utils/ApiService";
+import { fetchData } from "../utils/ApiService";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -62,7 +62,7 @@ const Profile = () => {
                 newPassword
             };
 
-            const response = await putData(url, data, false);
+            const response = await fetchData(url, "PUT", data, false);
 
             if(response && response.ok) {
                 setIsModalActive(false);
@@ -93,7 +93,7 @@ const Profile = () => {
         } else {
             const url = `${process.env.REACT_APP_BACKEND_URL}/api/User/delete`;
 
-            const response = await deleteData(url, {password: confirmPassword}, false);
+            const response = await fetchData(url, "DELETE", {password: confirmPassword}, false);
 
             if(response && response.ok) {
                 

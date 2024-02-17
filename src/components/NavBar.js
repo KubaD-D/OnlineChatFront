@@ -1,8 +1,6 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
 
 const NavBar = () => {
     const { username } = useAuth();

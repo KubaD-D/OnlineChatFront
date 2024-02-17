@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "./../context/AuthContext";
-import { postData } from "../utils/ApiService";
+import { fetchData } from "../utils/ApiService";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -23,9 +23,9 @@ const Register = () => {
             email: email
         };
 
-        const responseData = await postData(url, data);
+        const response = await fetchData(url, "POST", data, false);
 
-        if(responseData) {
+        if(response && response.ok) {
             navigateTo("/");
         }
     }

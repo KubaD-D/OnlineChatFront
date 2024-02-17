@@ -1,6 +1,4 @@
-import { Container } from "react-bootstrap";
 import Message from "./Message";
-import useFetch from "../utils/useFetch";
 import { useEffect, useRef, useState } from "react";
 
 const MessageContainer = ({ messages }) => {
