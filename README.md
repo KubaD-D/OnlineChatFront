@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+This is a client app for my Online Chat project. It was created using JavaScript with a React.js framework. The styling is done mostly using Bootstrap and the SignalR library is used for real-time communication with the server.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](https://github.com/KubaD-D/OnlineChatFront/assets/104513087/0d5b1217-ec8a-4744-ae02-6213a7914e24)
 
-## Available Scripts
+The app allows users to:
 
-In the project directory, you can run:
+-register new accounts
+![image](https://github.com/KubaD-D/OnlineChatFront/assets/104513087/c161fbed-d475-4817-b44e-ca7e49a0fcdf)
 
-### `npm start`
+-log in
+![image](https://github.com/KubaD-D/OnlineChatFront/assets/104513087/32f217bd-a3e8-42ef-945d-9abf439130c8)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+-change their password and delete their account
+![image](https://github.com/KubaD-D/OnlineChatFront/assets/104513087/d9713d4d-70fb-488f-920b-4094684561bd)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-create new chat rooms
+![image](https://github.com/KubaD-D/OnlineChatFront/assets/104513087/a3cf926f-c0be-4c4f-ade3-b0dcfba6306b)
 
-### `npm test`
+-join existing chat rooms (that user is a member of)
+![image](https://github.com/KubaD-D/OnlineChatFront/assets/104513087/3c94eb24-651c-4e90-8995-dd57982aff90)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-send and receive messaeges
+![image](https://github.com/KubaD-D/OnlineChatFront/assets/104513087/0af80a84-f2b0-4a9e-a66e-568fb745b8ba)
 
-### `npm run build`
+-display chat members (and remove them if needed), rename the chat room, add new user to the chat room or remove a chat room (if user is the owner of the chat room)
+![image](https://github.com/KubaD-D/OnlineChatFront/assets/104513087/628d736d-0c77-4ac5-88a8-cb3c45161a22)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-display chat members and leave the chat room (if user is not the owner of the chat room)
+![image](https://github.com/KubaD-D/OnlineChatFront/assets/104513087/768ac89c-d76a-4377-b499-026a7edb72e7)
