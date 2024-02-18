@@ -33,9 +33,13 @@ const Profile = () => {
             passwordsDontMatchRef.current.textContent = "Passwords must match";
             
             setTimeout(() => {
-                newPasswordRef.current.classList.remove("is-invalid");
-                repeatNewPasswordRef.current.classList.remove("is-invalid");
-                passwordsDontMatchRef.current.textContent = "";
+                try {
+                    newPasswordRef.current.classList.remove("is-invalid");
+                    repeatNewPasswordRef.current.classList.remove("is-invalid");
+                    passwordsDontMatchRef.current.textContent = "";
+                } catch(err) {
+                    console.error(err);
+                }
             }, 3000)
 
         } else if(oldPassword === newPassword) {
@@ -47,12 +51,17 @@ const Profile = () => {
 
             setTimeout(() => {
 
-                oldPasswordRef.current.classList.remove("is-invalid");
-                newPasswordRef.current.classList.remove("is-invalid");
-                repeatNewPasswordRef.current.classList.remove("is-invalid");
-                passwordsDontMatchRef.current.textContent = "";
+                try {
+                    oldPasswordRef.current.classList.remove("is-invalid");
+                    newPasswordRef.current.classList.remove("is-invalid");
+                    repeatNewPasswordRef.current.classList.remove("is-invalid");
+                    passwordsDontMatchRef.current.textContent = "";
+                } catch(err) {
+                    console.error(err);
+                }
 
             }, 3000)
+
 
         } else {
 

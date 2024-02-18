@@ -6,7 +6,6 @@ import { fetchData } from "../utils/ApiService";
 
 const ChatBox = ({ chatRoomId }) => {
 
-    //const { data } = useFetch(`${process.env.REACT_APP_BACKEND_URL}/api/ChatRoom/${chatRoomId}/messages`, !chatRoomId);
     const [messages, setMessages] = useState([]);
     const [connection, setConnection] = useState();
     const prevChatRoomIdRef = useRef(null);
@@ -23,6 +22,10 @@ const ChatBox = ({ chatRoomId }) => {
 
                 setMessages(messages);
             }
+        }
+
+        if(!chatRoomId) {
+            setMessages([]);
         }
 
         getMessages();
